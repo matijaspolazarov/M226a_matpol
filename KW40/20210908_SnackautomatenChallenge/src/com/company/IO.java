@@ -5,6 +5,8 @@ import java.math.BigInteger;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+//IO ist unabhängig von allen Klassen (als einzige Klasse)
+
 public class IO {
 
     static Scanner sc = new Scanner(System.in);
@@ -28,13 +30,23 @@ public class IO {
                 "|   |   ||  -__|     |  _  |  ||     |  _  |    |       ||  _  |  __||     ||  ||     |  -__|\n" +
                 " \\_____/ |_____|__|__|_____|__||__|__|___  |    |__|_|__||___._|____||__|__||__||__|__|_____|\n" +
                 "                                     |_____|                                                 ");
-        while (answer2 != 1 && answer2 != 2) {
+        drawBox(30, "1. Manager");
+        drawBox(30, "2. Customer ");
+        drawBox(30, "3. Check Connection ");
+
+        System.out.println("\n\nPick a number: ");
+        answer2 = IO.readInt();
+        while (answer2 != 1 && answer2 != 2 && answer2 != 3 && answer2 != 4) {
 
             drawBox(30, "1. Manager");
             drawBox(30, "2. Customer ");
+            drawBox(30, "3. Check Connection ");
+            drawBox(30, "4. Grab Data");
 
             System.out.println("\n\nPick a number: ");
             answer2 = IO.readInt();
+
+
         }
         return answer2;
     }
@@ -74,6 +86,7 @@ public class IO {
             } catch (NumberFormatException e) {
             }
         }
+
         return input;
     }
 
@@ -128,7 +141,6 @@ public class IO {
         }
 
         System.out.print("\u255D\n");
-
     }
 }
 
