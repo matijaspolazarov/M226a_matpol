@@ -7,6 +7,7 @@ public class CustomerHandler {
     ManagerHandler mngh;
     Scanner sc = new Scanner(System.in);
     private double coins = 0;
+    SnackImporter si = new SnackImporter();
 
     public CustomerHandler(ManagerHandler mngh) {
         this.mngh = mngh;
@@ -53,12 +54,18 @@ public class CustomerHandler {
                     break;
                 }
             }
+            if (!si.grabData("SELECT * FROM snack WHERE snackName = '" + a.getSnackName() + "'").isEmpty()) {
+                si.updateData("UPDATE snack SET snackPrice = '" + a.getSnackPrice() + "', numberOfSnacks = '" + a.getNumberOfSnacks() + "' WHERE snackName = '" + a.getSnackName() + "';");
+            } else {
+                si.pushData("INSERT INTO snack (snackName, snackPrice, numberOfSnacks) VALUES ('" + a.getSnackName() + "', '" + a.getSnackPrice() + "', '" + a.getNumberOfSnacks() + "');");
+            }
         }
     }
 
+
     public void changeUser() {
         IO.drawBox(25, "1. Manager");
-        IO.drawBox(25, "2. CustomerHandler ");
+        IO.drawBox(25, "2. Customer ");
 
         int answer3 = IO.readInt();
 

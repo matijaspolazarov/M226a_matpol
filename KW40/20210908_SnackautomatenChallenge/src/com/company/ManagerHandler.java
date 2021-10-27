@@ -23,7 +23,7 @@ public class ManagerHandler {
 
         String snackName;
         double snackPrice;
-        Long numberOfSnacks;
+        long numberOfSnacks;
 
         System.out.println("How much Snacks do you want to add?");
         int userInput = IO.readInt();
@@ -33,7 +33,7 @@ public class ManagerHandler {
             snackName = IO.readString();
 
             System.out.println("Price of snack: ");
-            snackPrice = sc.nextDouble();
+            snackPrice = IO.readDouble();
 
             System.out.println("Number of snacks");
             numberOfSnacks = (long) IO.readInt();
@@ -121,7 +121,7 @@ public class ManagerHandler {
         int pinAnswer = sc.nextInt();
 
         while (pinAnswer != password) {
-            System.out.println("Wrong input, try again");
+            System.out.println("Wrong password, please try again");
             pinAnswer = IO.readInt();
         }
         System.out.println("New Pin: ");

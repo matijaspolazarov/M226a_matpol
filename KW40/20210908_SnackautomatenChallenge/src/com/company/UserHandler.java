@@ -18,7 +18,7 @@ public class UserHandler {
     }
 
     public void welcomeMessage() {
-        while(true){
+        while (true) {
             switch (io.drawbox()) {
                 case 1 -> snackManager();
                 case 2 -> customerManager();
@@ -32,11 +32,11 @@ public class UserHandler {
         mh.setPasswordAnswer(IO.readInt());
 
         while (mh.getPasswordAnswer() != mh.getPassword()) {
-            System.out.println("error, try again: ");
+            System.out.println("Wrong password, please try again");
             mh.setPasswordAnswer(IO.readInt());
         }
-
-        while (IO.answer2 != 7) {
+        int tempAnswer = 0;
+        while (tempAnswer != 7) {
             IO.drawBox(25, "Hello Manager ");
             System.out.println("");
             IO.drawBox(25, "1. add snack");
@@ -48,9 +48,9 @@ public class UserHandler {
             IO.drawBox(25, "8. End program");
 
             System.out.println("Please select something");
-            int answer2 = IO.readInt();
+            tempAnswer = IO.readRangedInt(1, 8);
 
-            switch (answer2) {
+            switch (tempAnswer) {
                 case 1 -> mh.addSnack();
                 case 2 -> mh.deleteSnack();
                 case 3 -> mh.editPrice();
@@ -63,24 +63,23 @@ public class UserHandler {
     }
 
     public void customerManager() {
-        while (IO.answer != 7) {
+        int tempAnswer = 0;
+        while (tempAnswer != 8) {
             IO.drawBox(25, "1. Insert Coins ");
-            IO.drawBox(25, "2. print all snacks ");
-            IO.drawBox(25, "3. buy snacks ");
-            IO.drawBox(25, "4. print current balance");
-            IO.drawBox(25, "5. change user");
-            IO.drawBox(25, "6. fill all Snacks");
+            IO.drawBox(25, "2. buy snacks ");
+            IO.drawBox(25, "3. print current balance");
+            IO.drawBox(25, "4. change user");
+            IO.drawBox(25, "5. fill all Snacks");
             IO.drawBox(25, "8. end Program");
 
             System.out.println("\n\nPick a number: ");
-            IO.answer = IO.readInt();
+            tempAnswer = IO.readRangedInt(1, 8);
 
-            switch (IO.answer) {
+            switch (tempAnswer) {
                 case 1 -> ch.insertCoins();
-                case 2 -> ch.printAllSnacks();
-                case 3 -> ch.buySnack();
-                case 4 -> ch.printUserBalance();
-                case 5 -> ch.changeUser();
+                case 2 -> ch.buySnack();
+                case 3 -> ch.printUserBalance();
+                case 4 -> ch.changeUser();
                 case 8 -> System.exit(0);
             }
         }

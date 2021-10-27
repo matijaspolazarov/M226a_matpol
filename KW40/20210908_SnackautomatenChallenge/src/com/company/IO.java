@@ -12,7 +12,7 @@ public class IO {
     static Scanner sc = new Scanner(System.in);
 
     public static int answer = 0;
-    public static int answer2 = 0;
+    //public static int answer2 = 0;
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_BLACK = "\u001B[30m";
     public static final String ANSI_RED = "\u001B[31m";
@@ -35,21 +35,22 @@ public class IO {
         drawBox(30, "3. Check Connection ");
 
         System.out.println("\n\nPick a number: ");
-        answer2 = IO.readInt();
-        while (answer2 != 1 && answer2 != 2 && answer2 != 3 && answer2 != 4) {
+        int answer2 = IO.readRangedInt(1, 3);
+        while (!(answer2 >= 1 && answer2 <= 3)) {
 
             drawBox(30, "1. Manager");
             drawBox(30, "2. Customer ");
             drawBox(30, "3. Check Connection ");
-            drawBox(30, "4. Grab Data");
 
             System.out.println("\n\nPick a number: ");
-            answer2 = IO.readInt();
+            answer2 = IO.readRangedInt(1, 3);
 
 
         }
         return answer2;
     }
+
+
 
     public static int readRangedInt(int min, int max) {
         int input = min - 1;
@@ -60,7 +61,7 @@ public class IO {
             sc.nextLine();
         }
         while (input < min || input > max) {
-            System.out.println("There was an Error, please repeat your input");
+            System.out.println("There was an Error, please select a valid number");
             try {
                 input = sc.nextInt();
                 sc.nextLine();
@@ -74,16 +75,13 @@ public class IO {
     public static int readInt() {
         int input = 0;
         boolean isValid = false;
-        try {
-            input = Integer.parseInt(sc.nextLine());
-            isValid = true;
-        } catch (NumberFormatException e) {
-        }
+
         while (!isValid) {
             try {
                 input = Integer.parseInt(sc.nextLine());
                 isValid = true;
             } catch (NumberFormatException e) {
+                System.out.println("There was an Error, please repeat your input");
             }
         }
 
@@ -94,6 +92,20 @@ public class IO {
         return sc.nextLine();
     }
 
+    public static double readDouble() {
+        double input = 0;
+        boolean isValid = false;
+
+        while (!isValid) {
+            try {
+                input = Double.parseDouble(sc.nextLine());
+                isValid = true;
+            } catch (NumberFormatException e) {
+                System.out.println("There was an Error, please repeat your input");
+            }
+        }
+        return input;
+    }
 
     public static void drawBox(int length, String singleWord) {
 
