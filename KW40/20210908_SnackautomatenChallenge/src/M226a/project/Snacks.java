@@ -5,9 +5,14 @@ public class Snacks {
     private double snackPrice;
     private Long numberOfSnacks;
 
-    public Snacks() {
-    }
-
+    /**
+     * This Constructor is to create Snacks for the snackMachine.
+     * @param snackName is to call the Snack by a name. With this name you can later change several things (edit price,
+     *                  delete Snack, etc.)
+     * @param snackPrice is for the user to buy a snack. The user got a function to insert coins. With this coins
+     *                   he can buy a snack, if he has enough coins.
+     * @param numberOfSnacks is to set a number on how many snacks there are of a snack.
+     */
     public Snacks(String snackName, double snackPrice, Long numberOfSnacks) {
         this.snackName = snackName;
         this.snackPrice = snackPrice;

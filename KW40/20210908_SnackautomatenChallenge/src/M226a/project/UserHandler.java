@@ -1,5 +1,10 @@
 package M226a.project;
 
+/**
+ * This class handles the users Manager and Customer. It handles the menus of the Customer and of the Manager.
+ * The functions are written in the seperate classes ManagerHandler and CustomerHandler. In this class the functions are
+ * called.
+ */
 public class UserHandler {
 
     IO io;
@@ -33,7 +38,7 @@ public class UserHandler {
         System.out.println("What's the password? ");
         mh.setPasswordAnswer(IO.readInt());
 
-        while (mh.getPasswordAnswer() != mh.getPassword()) {
+        while (mh.getPasswordAnswer() != mh.getPin()) {
             System.out.println("Wrong password, please try again");
             mh.setPasswordAnswer(IO.readInt());
         }
@@ -46,7 +51,6 @@ public class UserHandler {
             IO.drawBox(25, "3. edit Price ");
             IO.drawBox(25, "4. change Pin ");
             IO.drawBox(25, "5. change user");
-            IO.drawBox(25, "6. fill whole Machine ");
             IO.drawBox(25, "8. End program");
 
             System.out.println("Please select something");
@@ -58,7 +62,6 @@ public class UserHandler {
                 case 3 -> mh.editPrice();
                 case 4 -> mh.changePin();
                 case 5 -> mh.changeUser();
-                case 6 -> mh.fillAllSnacks();
                 case 8 -> System.exit(0);
             }
         }

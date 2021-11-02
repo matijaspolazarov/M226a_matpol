@@ -49,7 +49,13 @@ public class IO {
     }
 
 
-
+    /**
+     * This function is to read a ranged int. If you want an input of the user between two numbers, this ranged int is
+     * usable. For example
+     * @param min
+     * @param max
+     * @return
+     */
     public static int readRangedInt(int min, int max) {
         int input = min - 1;
         try {

@@ -3,6 +3,9 @@ package M226a.project;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * This class is used for the managerHandler. Here are all functions for the Manager.
+ */
 public class ManagerHandler {
 
     UserHandler usrh;
@@ -12,13 +15,22 @@ public class ManagerHandler {
     Scanner sc = new Scanner(System.in);
     int j = 1;
     private double coins = 0;
-    private int password = 8630;
+    private int pin = 8630;
     private int passwordAnswer;
 
+    /**
+     * A constructor for the object.
+     * @param usrh
+     */
     public ManagerHandler(UserHandler usrh) {
         this.usrh = usrh;
     }
 
+    /**
+     * This function is used for the manager to add some individual snacks to the snackMachine. If you add a snack to
+     * the snackMachine it'll get updated in the database. If you end the program and start it again, the snack will be
+     * be added to the vending machine, because of the connection with the database.
+     */
     public void addSnack() {
 
         String snackName;
@@ -41,35 +53,19 @@ public class ManagerHandler {
             snacks.add(new Snacks(snackName, snackPrice, numberOfSnacks));
 
 
-            if(!si.grabData("SELECT * FROM snack WHERE snackName = '" + snackName + "'").isEmpty()){
+            if (!si.grabData("SELECT * FROM snack WHERE snackName = '" + snackName + "'").isEmpty()) {
                 si.updateData("UPDATE snack SET snackPrice = '" + snackPrice + "', numberOfSnacks = '" + numberOfSnacks + "' WHERE snackName = '" + snackName + "';");
-            }else{
-                si.pushData("INSERT INTO snack (snackName, snackPrice, numberOfSnacks) VALUES ('" + snackName + "', '" +  snackPrice + "', '" + numberOfSnacks + "');"); }
-        }
-    }
-
-
-    public void buySnack() {
-        System.out.println("Which snack do you want to buy? ");
-        String boughtSnack = IO.readString();
-
-        for (Snacks a : snacks) {
-            if (a.getSnackName().contains(boughtSnack)) {
-                if (coins < a.getSnackPrice()) {
-                    System.out.println("You have not enough money");
-                } else if (coins > a.getSnackPrice()) {
-                    System.out.println("Successfully bought snack");
-                    a.setNumberOfSnacks(a.getNumberOfSnacks() - 1);
-                    coins = coins - a.getSnackPrice();
-                } else if (a.getNumberOfSnacks() == 0) {
-                    System.out.println("No more " + a.getSnackName());
-                    break;
-                }
+            } else {
+                si.pushData("INSERT INTO snack (snackName, snackPrice, numberOfSnacks) VALUES ('" + snackName + "', '" + snackPrice + "', '" + numberOfSnacks + "');");
             }
         }
     }
 
-
+    /**
+     * The function deleteSnack() is used for the manager to delete a snack if he wants to. Like for the other functions
+     * the data of the deleted snack will be also deleted in the database. It is solved with a "DELETE" Statement to
+     * delete it from the database.
+     */
     public void deleteSnack() {
         System.out.println("How much items do you want to remove? ");
         int numsOfRemovedItems = IO.readInt();
@@ -87,6 +83,11 @@ public class ManagerHandler {
         }
     }
 
+    /**
+     * This function is to edit the price. First of all you have to write in a number of how many prices you want to edit.
+     * If you want to edit 2 snacks at once, you can write in the number 2 and it will loop it twice. After you edited
+     * the price it will automatically be updated in the database. This passage is possible through the update statement.
+     */
     public void editPrice() {
         System.out.println("How much prices do you want to edit? ");
         int amountOfPrices = IO.readInt();
@@ -98,35 +99,48 @@ public class ManagerHandler {
             String nameOfSnack = IO.readString();
 
             System.out.println("Your new price: ");
-            int newPriceOfSnack = IO.readInt();
+            double newPriceOfSnack = IO.readDouble();
 
             for (int k = 0; k < snacks.size(); k++) {
                 if (snacks.get(k).getSnackName().contains(nameOfSnack)) {
                     snacks.get(k).setSnackPrice(newPriceOfSnack);
                 }
             }
+            for (Snacks a : getSnacks()) {
+
+
+                si.updateData("UPDATE snack SET snackPrice = '" + a.getSnackPrice() + "', numberOfSnacks = '" + a.getNumberOfSnacks() + "' WHERE snackName = '" + a.getSnackName() + "';");
+            }
         }
     }
 
-    public void fillAllSnacks() {
+
+    /*public void fillAllSnacks() {
         snacks.add(new Snacks("Snickers", 2.50, 2L));
         snacks.add(new Snacks("Mars", 3, 2L));
         snacks.add(new Snacks("Oreo", 5, 2L));
 
         System.out.println("Successfully added Snacks to Vending Machine");
-    }
+    }*/
 
+    /**
+     * This function is to change the pin, first of all you have to type in the current pin to change the pin to a new
+     * one. The reason for returning the value of changePin() is to use it afterwards to log in into the Manager User
+     * with the new password. The function checks if the pinAnswer is the same as the password-
+     *
+     * @return the changed Pin
+     */
     public int changePin() {
         System.out.println("Current Pin: ");
         int pinAnswer = IO.readInt();
 
-        while (pinAnswer != password) {
+        while (pinAnswer != pin) {
             System.out.println("Wrong password, please try again");
             pinAnswer = IO.readInt();
         }
         System.out.println("New Pin: ");
         int newPin = IO.readInt();
-        password = newPin;
+        pin = newPin;
 
         System.out.println("Confirm your Pin");
         int confirmedPin = IO.readInt();
@@ -137,9 +151,13 @@ public class ManagerHandler {
         }
         System.out.println("Successfully changed Pin");
 
-        return password;
+        return pin;
     }
 
+    /**
+     * This function is to change the user. If you want to test something out as a Manager it's important, to change the
+     * user to "customer" to test it. If you are a customer and there's an error you can switch the user to the manager
+     */
     public void changeUser() {
         IO.drawBox(25, "1. Manager");
         IO.drawBox(25, "2. Customer ");
@@ -152,12 +170,12 @@ public class ManagerHandler {
         }
     }
 
-    public int getPassword() {
-        return password;
+    public int getPin() {
+        return pin;
     }
 
-    public void setPassword(int password) {
-        this.password = password;
+    public void setPin(int pin) {
+        this.pin = pin;
     }
 
     public int getPasswordAnswer() {
