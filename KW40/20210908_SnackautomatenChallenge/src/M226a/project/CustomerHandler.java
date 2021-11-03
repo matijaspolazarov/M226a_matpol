@@ -6,12 +6,13 @@ import java.util.Scanner;
  * This class handles the Customer. All the functions for the customer are created here.
  */
 public class CustomerHandler {
-    ManagerHandler mh;
-    Scanner sc = new Scanner(System.in);
     private double coins = 0;
-    SnackImporter si = new SnackImporter();
-    PrintSnackMachine ps = new PrintSnackMachine();
 
+    private ManagerHandler mh;
+    private SnackImporter si = new SnackImporter();
+    private PrintSnackMachine ps = new PrintSnackMachine();
+
+    //aggregation
     public CustomerHandler(ManagerHandler mngh) {
         this.mh = mngh;
     }
@@ -24,22 +25,6 @@ public class CustomerHandler {
         System.out.println("How much coins do you want to insert? ");
         coins = IO.readDouble();
     }
-
-    /*public void printAllSnacks() {
-        System.out.println(mh.getSnacks().size());
-        for (Snacks a : mh.getSnacks()) {
-            if (a.getNumberOfSnacks() == 0) {
-                System.out.println("No more Snacks");
-            } else {
-                System.out.println("\nSnack: " + a.getSnackName());
-                System.out.println("Price: " + a.getSnackPrice() + "0CHF");
-                System.out.println("Number of Snacks: " + a.getNumberOfSnacks());
-                System.out.println("------------------------\n");
-
-            }
-        }
-    */
-
 
     /**
      * The function printUserBalance() is to print the current user balance of his wallet / coins.

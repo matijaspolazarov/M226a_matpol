@@ -9,6 +9,12 @@ import java.util.ArrayList;
  * These functions are used with SQL Statements in the parameter, to delete, insert, edit, etc. a snack.
  */
 public class SnackImporter {
+    private Connection connection = null;
+    private String userName = "stduser";
+    private String password = "stduserpw";
+    private String URL = "jdbc:mariadb://localhost:3306/user";
+    private String driver = "org.mariadb.jdbc.Driver";
+
     /**
      * The function testConnection() is to test the connection between the java program to the database.
      * It contains the variables userName, password and URL from the database.
@@ -17,12 +23,6 @@ public class SnackImporter {
      * and it will print it out.
      */
     public void testConnection() {
-        Connection connection = null;
-        String userName = "stduser";
-        String password = "stduserpw";
-        String URL = "jdbc:mariadb://localhost:3306/user";
-        String driver = "org.mariadb.jdbc.Driver";
-
         try {
             connection = DriverManager.getConnection(URL, userName, password);
         } catch (SQLException e) {
@@ -33,6 +33,7 @@ public class SnackImporter {
 
     /**
      * The function grabData() is to get the data from the database. It is getting used within a "SELECT" statement.
+     *
      * @param query is for the other functions to update, add, delete, etc. something from the database.
      * @return ArrayList called tempSnacks
      */
@@ -62,12 +63,11 @@ public class SnackImporter {
     }
 
     /**
-     *
      * @param query is to use this function to update data. This param query is used as a "UPDATE" statement.
      * @return a boolean called successful. If it's "true" it's not catching an Exception and the boolean will be returned
      * as "false". If there's no error the boolean will be set on "true" and returned.
      */
-    public boolean updateData(String query){
+    public boolean updateData(String query) {
         boolean successful = true;
 
         try {
@@ -91,9 +91,10 @@ public class SnackImporter {
     /**
      * The function pushData() is to insert snacks into the snackMachine. As a Manager you got the option to add a snack.
      * If you add a snack it will automatically insert into the database.
+     *
      * @param query is to insert the Snack into the database. It's used within a "INSERT INTO" statement.
      */
-    public void pushData(String query){
+    public void pushData(String query) {
         try {
             String connectionUrl = "jdbc:mariadb://localhost:3306/user";
             Connection con = null;
@@ -113,9 +114,10 @@ public class SnackImporter {
     /**
      * This function is to delete a snack from the snackMachine. The Manager got the option to delete a snack. If he deletes
      * a snack in this program, it will also be deleted in the database.
+     *
      * @param query This param is used to create a "DELETE" statement, for the snack to be deleted in the database.
      */
-    public void deleteData(String query){
+    public void deleteData(String query) {
         try {
             String connectionUrl = "jdbc:mariadb://localhost:3306/user";
             Connection con = null;

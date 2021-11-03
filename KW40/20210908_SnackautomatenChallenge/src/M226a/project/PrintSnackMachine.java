@@ -3,7 +3,7 @@ package M226a.project;
 import java.util.ArrayList;
 
 /**
- *
+ * This class is to print out the snacks in a well-designed grid. This grid is programmed with unicode characters.
  */
 public class PrintSnackMachine {
     private final String HOR_LINE = "═";
@@ -18,6 +18,12 @@ public class PrintSnackMachine {
     private final String BOTTOM_LEFT_CORNER = "╚";
     private final String BOTTOM_RIGHT_CORNER = "╝";
 
+    /**
+     * The function printSnacks() is to print out the snacks in a grid.
+     * @param snacks is used to set the snacks. In my case I use the ArrayList
+     * @param snacksPerRow is to set the snacks per row for the printed grid.
+     * @param slotWidth is used to set the slot width from a single field of a snack.
+     */
     public void printSnacks(ArrayList<Snacks> snacks, int snacksPerRow, int slotWidth) {
         if (snacksPerRow < 1) snacksPerRow = 1;
         int length = stringLength(slotWidth, snacks);
@@ -28,7 +34,7 @@ public class PrintSnackMachine {
             //Content
             snackName(length, snacksPerRow, i, snacks);
             snackPrice(length, snacksPerRow, i, snacks);
-            snackNumber(length, snacksPerRow, i, snacks);
+            //snackNumber(length, snacksPerRow, i, snacks);
 
             if (i == amountRows) break;
             midRow(length, snacksPerRow);
@@ -64,6 +70,7 @@ public class PrintSnackMachine {
     public void lastRow(int length, int snacksPerRow) {
         row(length, snacksPerRow, BOTTOM_LEFT_CORNER, BOTTOM_RIGHT_CORNER, HOR_LINE_BOTTOM);
     }
+
 
     public int stringLength(int slotWidth, ArrayList<Snacks> snacks) {
         for (int i = 0; i < snacks.size(); i++) {
@@ -104,17 +111,6 @@ public class PrintSnackMachine {
         for (int j = 0; j < snacksPerRow; j++) {
             String content = j + i * snacksPerRow < snacks.size() ? "Price: " +
                     String.format("%04.2f", snacks.get(j + i * snacksPerRow).getSnackPrice()) : "";
-            printContent(length, content);
-            System.out.print(VER_LINE);
-        }
-        System.out.println();
-    }
-
-    public void snackNumber(int length, int snacksPerRow, int i, ArrayList<Snacks> snacks) {
-        System.out.print(VER_LINE);
-        for (int j = 0; j < snacksPerRow; j++) {
-            String content = j + i * snacksPerRow < snacks.size() ? "Nr. " + String.format("%03d", (j + i * snacksPerRow + 1))
-                    + " (" + String.format("%03d", snacks.get(j + i * snacksPerRow).getNumberOfSnacks()) + ")" : "";
             printContent(length, content);
             System.out.print(VER_LINE);
         }

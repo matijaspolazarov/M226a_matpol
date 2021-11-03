@@ -2,16 +2,16 @@ package M226a.project;
 
 /**
  * This class handles the users Manager and Customer. It handles the menus of the Customer and of the Manager.
- * The functions are written in the seperate classes ManagerHandler and CustomerHandler. In this class the functions are
+ * The functions are written in the separate classes ManagerHandler and CustomerHandler. In this class the functions are
  * called.
  */
 public class UserHandler {
 
-    IO io;
-    CustomerHandler ch;
-    ManagerHandler mh;
-    SnackImporter si;
-    PrintSnackMachine ps;
+    private IO io;
+    private CustomerHandler ch;
+    private ManagerHandler mh;
+    private SnackImporter si;
+    private PrintSnackMachine ps;
 
     public UserHandler() {
         io = new IO();
@@ -24,7 +24,7 @@ public class UserHandler {
         welcomeMessage();
     }
 
-    public void welcomeMessage() {
+    private void welcomeMessage() {
         while (true) {
             switch (io.drawbox()) {
                 case 1 -> snackManager();
@@ -43,8 +43,8 @@ public class UserHandler {
             mh.setPasswordAnswer(IO.readInt());
         }
         int tempAnswer = 0;
+        IO.drawBox(25, "Hello Manager ");
         while (tempAnswer != 7) {
-            IO.drawBox(25, "Hello Manager ");
             System.out.println("");
             IO.drawBox(25, "1. add snack");
             IO.drawBox(25, "2. delete Snack ");
@@ -67,6 +67,10 @@ public class UserHandler {
         }
     }
 
+    /**
+     * This function handles the Customer. It's solved within a switch-case. The user can input a number and then the
+     * function
+     */
     public void customerManager() {
         int tempAnswer = 0;
         while (tempAnswer != 8) {

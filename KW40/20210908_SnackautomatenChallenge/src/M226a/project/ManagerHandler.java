@@ -9,12 +9,10 @@ import java.util.Scanner;
 public class ManagerHandler {
 
     UserHandler usrh;
-    SnackImporter si = new SnackImporter();
+    private SnackImporter si = new SnackImporter();
 
     private ArrayList<Snacks> snacks = new ArrayList<>();
-    Scanner sc = new Scanner(System.in);
-    int j = 1;
-    private double coins = 0;
+
     private int pin = 8630;
     private int passwordAnswer;
 
@@ -114,15 +112,6 @@ public class ManagerHandler {
         }
     }
 
-
-    /*public void fillAllSnacks() {
-        snacks.add(new Snacks("Snickers", 2.50, 2L));
-        snacks.add(new Snacks("Mars", 3, 2L));
-        snacks.add(new Snacks("Oreo", 5, 2L));
-
-        System.out.println("Successfully added Snacks to Vending Machine");
-    }*/
-
     /**
      * This function is to change the pin, first of all you have to type in the current pin to change the pin to a new
      * one. The reason for returning the value of changePin() is to use it afterwards to log in into the Manager User
@@ -152,6 +141,7 @@ public class ManagerHandler {
         System.out.println("Successfully changed Pin");
 
         return pin;
+
     }
 
     /**
