@@ -19,7 +19,7 @@ public class SnackImporter {
      * The function testConnection() is to test the connection between the java program to the database.
      * It contains the variables userName, password and URL from the database.
      * The connection is solved within a try catch, if it connects successfully, the program will print out
-     * "Successfully connected to Database". If the connection is not working the program will catch a SQL Exception
+     * "Successfully connected to Database". If the connection is not working the program will catch an SQL Exception,
      * and it will print it out.
      */
     public void testConnection() {

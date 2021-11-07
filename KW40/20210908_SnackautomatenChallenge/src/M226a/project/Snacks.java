@@ -5,6 +5,7 @@ public class Snacks {
     private double snackPrice;
     private Long numberOfSnacks;
 
+
     /**
      * This Constructor is to create Snacks for the snackMachine with the attributes snackName, snackPrice, and
      * numberOfSnack.

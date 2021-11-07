@@ -24,6 +24,9 @@ public class UserHandler {
         welcomeMessage();
     }
 
+    /**
+     * This function (welcomeMessage()) prints out the boxes and handles the user input within a switch-case
+     */
     private void welcomeMessage() {
         while (true) {
             switch (io.drawbox()) {
@@ -34,13 +37,33 @@ public class UserHandler {
         }
     }
 
+    /**
+     * The function snackManager() handles the Manager. If the user decides to pick the manager he first has to write in
+     * the manager's password. If the password is correct he gets the Manager menu. The manager menu is also solved within
+     * a switch-case. The Manager can add a snack, delete a snack, edit the price of a snack, change the pin, change user
+     * and end the program.
+     */
     public void snackManager() {
+        int wrongPw = 3;
+        String answer = "";
         System.out.println("What's the password? ");
         mh.setPasswordAnswer(IO.readInt());
 
         while (mh.getPasswordAnswer() != mh.getPin()) {
-            System.out.println("Wrong password, please try again");
+            System.out.println("Wrong password, please try again (" + wrongPw + " Attempts remaining)");
             mh.setPasswordAnswer(IO.readInt());
+            //wrongPw--;
+            /*if (wrongPw <= 0) {
+                System.out.println("No more attempts");
+
+                while (!(answer.equals("A1B2C3"))) {
+                    System.out.println("Type in 'A1B2C3'");
+                    answer = IO.readString();
+                }
+            } else if (answer.equals("A1B2C3")) {
+                wrongPw = 3;
+                snackManager();
+            }*/
         }
         int tempAnswer = 0;
         IO.drawBox(25, "Hello Manager ");
